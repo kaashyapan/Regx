@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>exe</OutputType>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Basic.fs" />
+    <Compile Include="Anchor.fs" />
+    <Compile Include="Quantifier.fs" />
+    <Compile Include="Lookaround.fs" />
+    <Compile Include="Groups.fs" />
+    <Compile Include="Conditionals.fs" />
+    <Compile Include="Unicode.fs" />
+    <Compile Include="Escape.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Expecto" Version="9.0.4" />
+ </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Regx.fsproj" />
+  </ItemGroup>
+
+</Project>
