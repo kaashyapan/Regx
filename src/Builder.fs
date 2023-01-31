@@ -48,6 +48,7 @@ module Builder =
         | NegativeLookBehind of RegexElement
         //String literals
         | VerbatimString of string
+        | EscapedString of string
         //Conditionals
         | If of GroupIdentifier * RegexElement
         | Else of RegexElement
@@ -58,7 +59,7 @@ module Builder =
         | FormFeed
         | CarriageReturn
         | NullCharacter
-        //
+        //Internal
         | Empty
         | ElementList of seq<RegexElement>
         | RegEx of RegexElement
@@ -165,7 +166,9 @@ module Builder =
     let longest = RegexBuilder(Greedy Empty)
 
 
+    ///Match unicode block/category -/ \p{IsGreek}+/ or \p{Pd}
     let unicode category = RegexBuilder(Unicode category)
+    ///Negative unicode block/category -/ \P{IsGreek}+/ or \P{Pd}
     let nonUnicode category = RegexBuilder(NonUnicode category)
 
     ///Acts like a boolean OR. Matches the expression before or after the |.
@@ -217,6 +220,8 @@ module Builder =
 
     ///Unescaped string literal - Reserve characters will be automatically escaped +*?^$\.[]{}()|/
     let verbatimString str = RegexBuilder(VerbatimString str)
+    ///Escaped string literal
+    let escapedString str = RegexBuilder(EscapedString str)
     ///Matches a TAB character (char code 9). \t
     let tab = RegexBuilder(Tab)
     ///Matches a LINE FEED character (char code 10). \n

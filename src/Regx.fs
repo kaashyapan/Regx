@@ -82,7 +82,11 @@ type Regx =
         | NegativeLookAhead el -> el |> translate |> sprintf """(?!%s)"""
         | PositiveLookBehind el -> el |> translate |> sprintf """(?<=%s)"""
         | NegativeLookBehind el -> el |> translate |> sprintf """(?<!%s)"""
-        | VerbatimString str -> str
+        | VerbatimString str ->
+            let pattern = """([\+\*\?\^\$\.\[\]\{\}\(\)\|\/\\])"""
+            let replace = """\$1"""
+            System.Text.RegularExpressions.Regex.Replace(str, pattern, replace)
+        | EscapedString str -> str
         | Tab -> """\t"""
         | LineFeed -> """\n"""
         | VerticalTab -> """\v"""
