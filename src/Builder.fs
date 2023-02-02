@@ -81,7 +81,7 @@ module Builder =
                 )
             |> RegexBuilder
 
-        member this.get = el
+        member internal this.get = el
 
         member this.Run(n: RegexBuilder) =
             match this.get with

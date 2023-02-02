@@ -108,3 +108,10 @@ More examples in tests
 |`formFeed`||
 |`carriageReturn`||
 |`nullCharacter`||
+
+### Additional custom builders
+
+|DSL  |What it means  |
+|--|--|
+| `word` | Represents an actual word. Equivalent to /(?:\w+)/  |
+|--|--|
