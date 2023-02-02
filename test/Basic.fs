@@ -53,6 +53,15 @@ let tests =
           let result = (Regex.Matches(input, pattern)) |> Seq.length
           Expect.equal result 13 $"{input} should match generated pattern {pattern}. Expected pattern [g-s]"
       }
+      test "in List" {
+          let pattern =
+              regex { inList [ inRange 'g' 's'; inRange '5' '9'; verbatimString @"+" ] }
+              |> Regx.make
+
+          let input = "abcdefghijklmnopqrstuvwxyz123456789+"
+          let result = (Regex.Matches(input, pattern)) |> Seq.length
+          Expect.equal result 19 $"{input} should match generated pattern {pattern}. Expected pattern [g-s5-9]"
+      }
       test "Dot" {
           let pattern = regex { any } |> Regx.make
 

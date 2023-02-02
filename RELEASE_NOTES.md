@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+## 0.3.1
+* Add inList
+* Add email helper 
+
 ## 0.3.0
 * get method on the Builder should be internal
 * Changed word to wordChar and added word helper

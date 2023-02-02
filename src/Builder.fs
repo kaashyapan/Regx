@@ -9,6 +9,7 @@ module Builder =
         | In of char seq
         | NotIn of char seq
         | InRange of char * char
+        | InList of RegexBuilder list
         | Any
         | AnyChar
         | Digit
@@ -64,7 +65,7 @@ module Builder =
         | ElementList of seq<RegexElement>
         | RegEx of RegexElement
 
-    type RegexBuilder(el: RegexElement) =
+    and RegexBuilder(el: RegexElement) =
         member _.Yield(n: RegexBuilder) = n
 
         member _.Combine(x1: RegexBuilder, x2: RegexBuilder) =
@@ -139,6 +140,9 @@ module Builder =
     ///Negate character set - Match any character that is not in the set.
     ///e.g charNotIn (seq{'a'.. 'z'})
     let charNotIn charSet = RegexBuilder(NotIn charSet)
+
+    ///Matches characters in list.
+    let inList (set: RegexBuilder list) = RegexBuilder(InList set)
 
     ///Range - Matches a character having a character code between the two specified characters inclusive.
     ///e.g inRange 'a' 'z'

@@ -1,5 +1,7 @@
 namespace Regx
 
+open System.Text.RegularExpressions
+
 type Regx =
     static member translate(el: RegexElement) =
         let translate el = Regx.translate el
@@ -20,6 +22,13 @@ type Regx =
         | NotWordChar -> """\W"""
         | In set -> set |> Seq.fold (fun acc x -> acc + x.ToString()) "" |> sprintf """[%s]"""
         | NotIn set -> set |> Seq.fold (fun acc x -> acc + x.ToString()) "" |> sprintf """[^%s]"""
+        | InList ls ->
+            let pattern = @"\[(.+)\]"
+
+            ls
+            |> List.map (fun el -> el.get |> translate |> (fun str -> Regex.Replace(str, pattern, @"$1")))
+            |> String.concat ""
+            |> sprintf """[%s]"""
         | InRange(start, end') -> sprintf """[%c-%c]""" start end'
         | Any -> """."""
         | AnyChar -> """[\s\S]"""

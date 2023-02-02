@@ -76,6 +76,7 @@ More examples in tests
 | `charIn` |Match any character in the set  |
 | `charNotIn` |Negate character set - Match any character that is not in the set.  |
 | `inRange` |Matches a character having a character code between the two specified characters inclusive. |
+| `inList` |Matches characters in list|
 | `beginsWith` |Enclosed expression occurs in the beginning of the fragment |
 | `endsWith` |Enclosed expression occurs in the end of the fragment |
 | `beginsWithString` |Enclosed expression occurs in the beginning of the fragment  |
@@ -114,4 +115,4 @@ More examples in tests
 |DSL  |What it means  |
 |--|--|
 | `word` | Represents an actual word. Equivalent to /(?:\w+)/  |
-|--|--|
+| `email` | English email |
