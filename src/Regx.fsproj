@@ -18,7 +18,7 @@
     <!-- NuGet Pack settings -->
     <PackageId>Regx</PackageId>
     <PackageTags>fsharp;fable;Regex;Regx;Regular Expression</PackageTags>
-    <PackageReleaseNotes>https://github.com/kaashyapan/Regx/main/RELEASE_NOTES.md</PackageReleaseNotes>
+    <PackageReleaseNotes>RELEASE_NOTES.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/kaashyapan/Regx</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Include="../LICENSE" Pack="true" PackagePath="" />
     <None Include="../README.md" Pack="true" PackagePath="" />
+    <None Include="../RELEASE_NOTES.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
