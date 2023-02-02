@@ -35,5 +35,6 @@
       <Compile Include="Category.fs" />
       <Compile Include="Builder.fs" />
       <Compile Include="Regx.fs" />
+      <Compile Include="Helpers.fs" />
   </ItemGroup>
 </Project>

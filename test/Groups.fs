@@ -33,15 +33,15 @@ let tests =
                   group {
                       occurs 2 {
                           group {
-                              oneOrMore { word }
-                              notWord
+                              oneOrMore { wordChar }
+                              notWordChar
                           }
                       }
                   }
 
                   group {
-                      capture { oneOrMore { word } }
-                      notWord
+                      capture { oneOrMore { wordChar } }
+                      notWordChar
                   }
               }
               |> Regx.make
@@ -62,15 +62,15 @@ let tests =
                   group {
                       occurs 2 {
                           group {
-                              oneOrMore { word }
-                              notWord
+                              oneOrMore { wordChar }
+                              notWordChar
                           }
                       }
                   }
 
                   group {
-                      captureAs "FirstName" { oneOrMore { word } }
-                      notWord
+                      captureAs "FirstName" { oneOrMore { wordChar } }
+                      notWordChar
                   }
               }
               |> Regx.make
@@ -90,7 +90,7 @@ let tests =
 
       test "Balanced Named group" {
           let pattern =
-              regex { between "<span>" "</span>" { captureAs "FirstName" { oneOrMore { word } } } }
+              regex { between "<span>" "</span>" { captureAs "FirstName" { oneOrMore { wordChar } } } }
               |> Regx.make
 
           let input = @"<span>Sally</span>"
@@ -108,7 +108,7 @@ let tests =
 
       test "Balanced UnNamed group" {
           let pattern =
-              regex { between "<span>" "</span>" { capture { oneOrMore { word } } } }
+              regex { between "<span>" "</span>" { capture { oneOrMore { wordChar } } } }
               |> Regx.make
 
           let input = @"<span>Sally</span>"
@@ -125,9 +125,9 @@ let tests =
       test "Ref group index" {
           let pattern =
               regex {
-                  capture { oneOrMore { word } }
+                  capture { oneOrMore { wordChar } }
                   whiteSpace
-                  capture { oneOrMore { word } }
+                  capture { oneOrMore { wordChar } }
                   whiteSpace
                   refGroupNo 1
                   whiteSpace
@@ -147,9 +147,9 @@ let tests =
       test "Ref group name" {
           let pattern =
               regex {
-                  captureAs "Greeting" { oneOrMore { word } }
+                  captureAs "Greeting" { oneOrMore { wordChar } }
                   whiteSpace
-                  captureAs "Name" { oneOrMore { word } }
+                  captureAs "Name" { oneOrMore { wordChar } }
                   whiteSpace
                   refGroupName "Greeting"
                   whiteSpace

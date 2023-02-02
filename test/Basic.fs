@@ -67,15 +67,15 @@ let tests =
           let result = (Regex.Matches(input, pattern)) |> Seq.length
           Expect.equal result 23 $"{input} should match generated pattern {pattern}. Expected pattern [\s\S]"
       }
-      test "Word" {
-          let pattern = regex { word } |> Regx.make
+      test "Word character" {
+          let pattern = regex { wordChar } |> Regx.make
 
           let input = "bonjour, mon frère"
           let result = (Regex.Matches(input, pattern)) |> Seq.length
           Expect.equal result 15 $"{input} should match generated pattern {pattern}. Expected pattern \w"
       }
-      test "Not Word" {
-          let pattern = regex { notWord } |> Regx.make
+      test "Not word character" {
+          let pattern = regex { notWordChar } |> Regx.make
 
           let input = "bonjour, mon frère"
           let result = (Regex.Matches(input, pattern)) |> Seq.length

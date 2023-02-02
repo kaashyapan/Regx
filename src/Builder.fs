@@ -4,8 +4,8 @@ namespace Regx
 module Builder =
     type RegexElement =
         //Character classes
-        | Word
-        | NotWord
+        | WordChar
+        | NotWordChar
         | In of char seq
         | NotIn of char seq
         | InRange of char * char
@@ -121,10 +121,10 @@ module Builder =
     let any = RegexBuilder(Any)
     ///Match any - A character set that can be used to match any character, including line breaks, without the dotall flag. Represents [\s\S]
     let anyChar = RegexBuilder(AnyChar)
-    ///Word - Matches any word character (alphanumeric & underscore). Only matches low-ascii characters (no accented or non-roman characters). Equivalent to [A-Za-z0-9_]
-    let word = RegexBuilder(Word)
-    ///Not word - Matches any character that is not a word character (alphanumeric & underscore). Equivalent to [^A-Za-z0-9_]
-    let notWord = RegexBuilder(NotWord)
+    ///Matches any word character (alphanumeric & underscore). Only matches low-ascii characters (no accented or non-roman characters). Equivalent to [A-Za-z0-9_]
+    let wordChar = RegexBuilder(WordChar)
+    ///Matches any character that is not a word character (alphanumeric & underscore). Equivalent to [^A-Za-z0-9_]
+    let notWordChar = RegexBuilder(NotWordChar)
     ///Digit - Matches any digit character (0-9). Equivalent to [0-9].
     let digit = RegexBuilder(Digit)
     ///Non-Digit - Matches any character that is not a digit character (0-9). Equivalent to [^0-9].

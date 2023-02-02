@@ -15,6 +15,7 @@
     <Compile Include="Conditionals.fs" />
     <Compile Include="Unicode.fs" />
     <Compile Include="Escape.fs" />
+    <Compile Include="CustomHelpers.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

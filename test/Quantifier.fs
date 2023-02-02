@@ -60,7 +60,7 @@ let tests =
               regex {
                   longest {
                       verbatimString "r"
-                      word
+                      wordChar
                   }
               }
               |> Regx.make
@@ -74,7 +74,7 @@ let tests =
               regex {
                   fewest {
                       verbatimString "r"
-                      word
+                      wordChar
                   }
               }
               |> Regx.make

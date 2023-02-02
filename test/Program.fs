@@ -12,6 +12,7 @@ let main _ =
           Lookaround.tests
           Conditionals.tests
           Unicodes.tests
+          CustomHelpers.tests
           Escape.tests ]
         |> testList "Tests"
 

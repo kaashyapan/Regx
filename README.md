@@ -19,17 +19,17 @@ let protocol =
 
 let subdomain =
     group {
-        oneOrMore { word }
+        oneOrMore { wordChar }
         verbatimString "."
     }
 
 let domain =
     group {
-        captureAs "domain" { occursBetween 2 256 { word } }
+        captureAs "domain" { occursBetween 2 256 { wordChar } }
         verbatimString "."
     }
 
-let ending = group { occursBetween 1 8 { word } }
+let ending = group { occursBetween 1 8 { wordChar } }
 
 let port =
     group {
@@ -41,7 +41,7 @@ let path =
     zeroOrMore {
         capture {
             verbatimString "/"
-            oneOrMore { word }
+            oneOrMore { wordChar }
         }
     }
 
@@ -67,8 +67,8 @@ More examples in tests
 |--|--|
 | `any` |Dot - Matches any character except linebreaks. Equivalent to [^\n\r].  |
 | `anyChar` |Match any - A character set that can be used to match any character, including line breaks, without the dotall flag. Represents [\s\S]  |
-| `word` |Matches any word character (alphanumeric & underscore). Only matches low-ascii characters (no accented or non-roman characters). Equivalent to [A-Za-z0-9_]  |
-| `notWord` |Matches any character that is not a word character (alphanumeric & underscore). Equivalent to [^A-Za-z0-9_]  |
+| `wordChar` |Matches any word character (alphanumeric & underscore). Only matches low-ascii characters (no accented or non-roman characters). Equivalent to [A-Za-z0-9_]  |
+| `notWordChar` |Matches any character that is not a word character (alphanumeric & underscore). Equivalent to [^A-Za-z0-9_]  |
 | `digit` |Matches any digit character (0-9). Equivalent to [0-9].  |
 | `notDigit` |Matches any character that is not a digit character (0-9). Equivalent to [^0-9].  |
 | `whiteSpace` |Matches any whitespace character (spaces, tabs, line breaks).  |

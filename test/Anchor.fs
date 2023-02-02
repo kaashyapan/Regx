@@ -9,14 +9,14 @@ open Regx
 //Anchors
 let tests =
     [ test "Starts with" {
-          let pattern = regex { beginsWith { oneOrMore { word } } } |> Regx.make
+          let pattern = regex { beginsWith { oneOrMore { wordChar } } } |> Regx.make
 
           let input = "she sells seashells"
           let result = Regex.Matches(input, pattern) |> Seq.head
           Expect.equal result.Value "she" $"'{input}' should match generated pattern {pattern}. Expected pattern ^\w+"
       }
       test "Ends with" {
-          let pattern = regex { endsWith { oneOrMore { word } } } |> Regx.make
+          let pattern = regex { endsWith { oneOrMore { wordChar } } } |> Regx.make
 
           let input = "she sells seashells"
           let result = Regex.Matches(input, pattern) |> Seq.head
@@ -27,14 +27,14 @@ let tests =
               $"'{input}' should match generated pattern {pattern}. Expected pattern \w+$"
       }
       test "Starts with string" {
-          let pattern = regex { beginsWithString { oneOrMore { word } } } |> Regx.make
+          let pattern = regex { beginsWithString { oneOrMore { wordChar } } } |> Regx.make
 
           let input = "she sells seashells"
           let result = Regex.Matches(input, pattern) |> Seq.head
           Expect.equal result.Value "she" $"'{input}' should match generated pattern {pattern}. Expected pattern /A\w+"
       }
       test "Ends with string" {
-          let pattern = regex { endsWithString { oneOrMore { word } } } |> Regx.make
+          let pattern = regex { endsWithString { oneOrMore { wordChar } } } |> Regx.make
 
           let input = "she sells seashells"
           let result = Regex.Matches(input, pattern) |> Seq.head

@@ -16,8 +16,8 @@ type Regx =
         let join ls = Seq.fold (fun acc x -> acc + x) "" ls
 
         match el with
-        | Word -> """\w"""
-        | NotWord -> """\W"""
+        | WordChar -> """\w"""
+        | NotWordChar -> """\W"""
         | In set -> set |> Seq.fold (fun acc x -> acc + x.ToString()) "" |> sprintf """[%s]"""
         | NotIn set -> set |> Seq.fold (fun acc x -> acc + x.ToString()) "" |> sprintf """[^%s]"""
         | InRange(start, end') -> sprintf """[%c-%c]""" start end'
