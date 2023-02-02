@@ -116,3 +116,8 @@ More examples in tests
 |--|--|
 | `word` | Represents an actual word. Equivalent to /(?:\w+)/  |
 | `email` | English email |
+| `url` | English url |
+| `guid` | GUID |
+| `uuid` | UUID |
+| `ip4Address` | IPv4 |
+| `ip6Address` | IPv6 |

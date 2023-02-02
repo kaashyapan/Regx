@@ -1,6 +1,9 @@
 Release Notes
 =============
 
+## 0.3.2
+* Add url, ip address, guid & uuid helpers
+
 ## 0.3.1
 * Add inList
 * Add email helper 

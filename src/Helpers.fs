@@ -8,18 +8,18 @@ module Helpers =
     let domain =
         oneOrMore { inList [ inRange 'a' 'z'; inRange 'A' 'Z'; inRange '0' '9'; verbatimString @"-" ] }
 
-    let emailId =
-        oneOrMore {
-            inList
-                [ inRange 'a' 'z'
-                  inRange 'A' 'Z'
-                  inRange '0' '9'
-                  verbatimString """.!#$%&’*+/=?^_`{|}~-""" ]
-        }
-
     ///Matches an English email
     //(?:^(?<emailId>[a-zA-Z0-9\.!#\$%&’\*\+\/=\?\^_`\{\|\}~-]+)@(?<domain>[a-zA-Z0-9-]+)(?:\.(?<ending>[a-zA-Z0-9-]+))*$)
     let email =
+        let emailId =
+            oneOrMore {
+                inList
+                    [ inRange 'a' 'z'
+                      inRange 'A' 'Z'
+                      inRange '0' '9'
+                      verbatimString """.!#$%&’*+/=?^_`{|}~-""" ]
+            }
+
         group {
             beginsWith { captureAs "emailId" { emailId } }
             verbatimString @"@"
@@ -33,4 +33,192 @@ module Helpers =
                     }
                 }
             }
+        }
+
+    let ip6Address =
+        let quad =
+            group {
+                wordBoundary
+                occursBetween 1 4 { group { inList [ inRange '0' '9'; inRange 'a' 'f'; inRange 'A' 'F' ] } }
+                wordBoundary
+            }
+
+        group {
+            beginsWith {
+                endsWith {
+                    mayHave { quad }
+                    verbatimString ":"
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    mayHave { quad }
+                    mayHave { verbatimString ":" }
+                    verbatimString ":"
+                    mayHave { quad }
+                }
+            }
+        }
+
+    let ip4Address =
+        let octet =
+            group {
+                wordBoundary
+
+                group {
+                    oneOf {
+                        group {
+                            verbatimString "25"
+                            inRange '0' '5'
+                        }
+
+                        group {
+                            verbatimString "2"
+                            inRange '0' '4'
+                            inRange '0' '9'
+                        }
+
+                        group {
+                            mayHave { inRange '0' '1' }
+                            inRange '0' '9'
+                            mayHave { inRange '0' '9' }
+                        }
+                    }
+                }
+
+                wordBoundary
+            }
+
+        beginsWith {
+            endsWith {
+                group {
+                    octet
+                    verbatimString "."
+                    octet
+                    verbatimString "."
+                    octet
+                    verbatimString "."
+                    octet
+                }
+            }
+        }
+
+    let ipAddress =
+        group {
+            oneOf {
+                ip4Address
+                ip6Address
+            }
+        }
+
+    let url =
+        let protocol =
+            group {
+                captureAs "protocol" {
+                    oneOf {
+                        verbatimString "http"
+                        verbatimString "https"
+                    }
+                }
+
+                verbatimString "://"
+            }
+
+        let subDomain =
+            captureAs "subdomain" {
+                zeroOrMore {
+                    group {
+                        occursBetween 1 256 {
+                            inList
+                                [ inRange 'a' 'z'
+                                  inRange 'A' 'Z'
+                                  inRange '0' '9'
+                                  verbatimString """@:%._\+~#=""" ]
+                        }
+
+                        verbatimString "."
+                    }
+                }
+            }
+
+        let domain =
+            group {
+                captureAs "domain" {
+                    occursBetween 1 256 {
+                        inList
+                            [ inRange 'a' 'z'
+                              inRange 'A' 'Z'
+                              inRange '0' '9'
+                              verbatimString """@:%._\+~#=""" ]
+                    }
+                }
+
+                verbatimString "."
+            }
+
+        let ending =
+            captureAs "ending" {
+                oneOrMore {
+                    group { occursBetween 1 6 { inList [ inRange 'a' 'z'; inRange 'A' 'Z'; inRange '0' '9' ] } }
+                }
+            }
+
+        let path =
+            zeroOrMore {
+                group {
+                    verbatimString "/"
+                    captureAs "path" { word }
+                }
+            }
+
+        group {
+            mayHave { protocol }
+            mayHave { subDomain }
+            domain
+            ending
+            path
+        }
+
+    let guid =
+        let hex = inList [ inRange '0' '9'; inRange 'a' 'f'; inRange 'A' 'F' ]
+
+        group {
+            beginsWith {
+                mayHave { verbatimString "{" }
+                occurs 8 { hex }
+            }
+
+            verbatimString "-"
+            occurs 4 { hex }
+            verbatimString "-"
+            occurs 4 { hex }
+            verbatimString "-"
+            occurs 4 { hex }
+            verbatimString "-"
+
+            endsWith {
+                occurs 12 { hex }
+                mayHave { verbatimString "}" }
+            }
+        }
+
+    let uuid =
+        let hex = inList [ inRange '0' '9'; inRange 'a' 'f' ]
+
+        group {
+            beginsWith { occurs 8 { hex } }
+            escapedString "-"
+            occurs 4 { hex }
+            escapedString "-"
+            occurs 4 { hex }
+            escapedString "-"
+            occurs 4 { hex }
+            escapedString "-"
+            endsWith { occurs 12 { hex } }
         }
