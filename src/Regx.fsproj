@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!-- General -->
     <AssemblyName>Regx</AssemblyName>
-    <Version>0.3.2</Version>
+    <Version>0.3.3</Version>
     <Description>Regex for humans</Description>
     <Copyright>Copyright 2023</Copyright>
     <Company>kaashyapan.com</Company>

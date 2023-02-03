@@ -131,9 +131,9 @@ module Helpers =
             }
 
         let subDomain =
-            captureAs "subdomain" {
-                zeroOrMore {
-                    group {
+            zeroOrMore {
+                group {
+                    captureAs "subdomain" {
                         occursBetween 1 256 {
                             inList
                                 [ inRange 'a' 'z'
@@ -141,9 +141,9 @@ module Helpers =
                                   inRange '0' '9'
                                   verbatimString """@:%._\+~#=""" ]
                         }
-
-                        verbatimString "."
                     }
+
+                    verbatimString "."
                 }
             }
 
@@ -172,8 +172,30 @@ module Helpers =
         let path =
             zeroOrMore {
                 group {
-                    verbatimString "/"
-                    captureAs "path" { word }
+                    oneOf {
+                        group {
+                            verbatimString "/"
+                            captureAs "path" { word }
+                        }
+
+                        verbatimString "/"
+                        verbatimString "#"
+                    }
+                }
+            }
+
+        let query =
+            zeroOrMore {
+                group {
+                    oneOf {
+                        verbatimString "&"
+                        verbatimString "?"
+                        notWhiteSpace
+                    }
+
+                    captureAs "key" { word }
+                    verbatimString "="
+                    captureAs "value" { word }
                 }
             }
 
@@ -183,6 +205,7 @@ module Helpers =
             domain
             ending
             path
+            query
         }
 
     let guid =

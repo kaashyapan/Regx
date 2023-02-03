@@ -30,9 +30,15 @@ let tests =
               [ @"https://google.com"
                 @"http://www.google.com"
                 @"google.com/path1/path2"
-                @"www.google.com/path1" ]
+                @"www.google.com/path1"
+                @"www.google.com/path1/path2/?q1=v1&q2=200"
+                @"www.google.com/path1#?" ]
 
           let result = input |> List.map (fun i -> (Regex.Match(i, pattern)).Value)
+          // (Regex.Match(@"www.google.com/path1#?q1=v1&q2=200", pattern)).Groups.Values
+          // |> Seq.toArray
+          // |> Array.map (fun r -> printfn "%A" r)
+          // |> ignore
 
           Expect.equal result input $"'{input}' should match generated pattern {pattern}"
       }
