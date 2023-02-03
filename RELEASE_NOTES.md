@@ -1,6 +1,9 @@
 Release Notes
 =============
 
+## 0.3.3
+* Add queries to url
+
 ## 0.3.2
 * Add url, ip address, guid & uuid helpers
 

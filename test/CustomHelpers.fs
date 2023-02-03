@@ -67,6 +67,30 @@ let tests =
           let expected = [ true; true; true; true; true; true; false ]
           Expect.equal result expected $"'{input}' should match generated pattern {pattern}"
       }
+      test "ip" {
+          let pattern = regex { ipAddress } |> Regx.make
+
+          let input =
+              [ "2001:db8:3333:4444:5555:6666:7777:8888"
+                "2001:db8::"
+                "::1234:5678"
+                "2001:db8::1234:5678"
+                "1.2.3.4"
+                "01.102.103.104"
+                "255.255.255.255"
+                "256.2.3.4"
+                "2001:0db8:0001:0000:0000:0ab9:C0A8:0102"
+                "2001:db8:1::ab9:C0A8:102"
+                "2001:0tb8:0001:0000:0000:0ab9:C0A8:0102" ]
+
+          let result = input |> List.map (fun i -> (Regex.Match(i, pattern)).Success)
+
+          let expected =
+              [ true; true; true; true; true; true; true; false; true; true; false ]
+
+          Expect.equal result expected $"'{input}' should match generated pattern {pattern}"
+      }
+
       test "Guid" {
           let pattern = regex { guid } |> Regx.make
 

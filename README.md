@@ -121,3 +121,4 @@ More examples in tests
 | `uuid` | UUID |
 | `ip4Address` | IPv4 |
 | `ip6Address` | IPv6 |
+| `ipAddress` | IPV4 or IPv6 (does not support embedded IPv4 address)|
