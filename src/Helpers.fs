@@ -13,11 +13,7 @@ module Helpers =
     let email =
         let emailId =
             oneOrMore {
-                inList
-                    [ inRange 'a' 'z'
-                      inRange 'A' 'Z'
-                      inRange '0' '9'
-                      verbatimString """.!#$%&’*+/=?^_`{|}~-""" ]
+                inList [ inRange 'a' 'z'; inRange 'A' 'Z'; inRange '0' '9'; verbatimString """.!#$%&’*+/=?^_`{|}~-""" ]
             }
 
         group {
@@ -136,10 +132,7 @@ module Helpers =
                     captureAs "subdomain" {
                         occursBetween 1 256 {
                             inList
-                                [ inRange 'a' 'z'
-                                  inRange 'A' 'Z'
-                                  inRange '0' '9'
-                                  verbatimString """@:%._\+~#=""" ]
+                                [ inRange 'a' 'z'; inRange 'A' 'Z'; inRange '0' '9'; verbatimString """@:%._\+~#=""" ]
                         }
                     }
 
@@ -151,11 +144,7 @@ module Helpers =
             group {
                 captureAs "domain" {
                     occursBetween 1 256 {
-                        inList
-                            [ inRange 'a' 'z'
-                              inRange 'A' 'Z'
-                              inRange '0' '9'
-                              verbatimString """@:%._\+~#=""" ]
+                        inList [ inRange 'a' 'z'; inRange 'A' 'Z'; inRange '0' '9'; verbatimString """@:%._\+~#=""" ]
                     }
                 }
 

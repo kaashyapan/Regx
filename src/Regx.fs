@@ -11,7 +11,8 @@ type Regx =
                 (fun x ->
                     function
                     | [] -> [ x ]
-                    | xs -> x :: sep :: xs)
+                    | xs -> x :: sep :: xs
+                )
                 ls
                 []
 

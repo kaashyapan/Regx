@@ -146,8 +146,7 @@ module Builder =
 
     ///Range - Matches a character having a character code between the two specified characters inclusive.
     ///e.g inRange 'a' 'z'
-    let inRange startChar endChar =
-        RegexBuilder(InRange(startChar, endChar))
+    let inRange startChar endChar = RegexBuilder(InRange(startChar, endChar))
 
     ///^ - Enclosed expression occurs in the beginning of the fragment
     let beginsWith = RegexBuilder(BeginsWith Empty)
@@ -169,7 +168,6 @@ module Builder =
     ///Greedy - Makes the enclosed fragment Greedily, causing it to match as many characters as possible. By default, quantifiers are greedy, and will match as many characters as possible.
     let longest = RegexBuilder(Greedy Empty)
 
-
     ///Match unicode block/category -/ \p{IsGreek}+/ or \p{Pd}
     let unicode category = RegexBuilder(Unicode category)
     ///Negative unicode block/category -/ \P{IsGreek}+/ or \P{Pd}
@@ -188,17 +186,14 @@ module Builder =
 
     ///Matches the specified quantity or more of the enclosed token.
     /// e.g occursMoreThan 3 { word }
-    let occursMoreThan (times: int) =
-        RegexBuilder(OccursMoreThan(times, Empty))
+    let occursMoreThan (times: int) = RegexBuilder(OccursMoreThan(times, Empty))
 
     ///Matches a quantity of the enclosed toke in the specified range.
     /// e.g occursBetween 3 { word }
-    let occursBetween (minTimes: int) (maxTimes: int) =
-        RegexBuilder(OccursBetween(minTimes, maxTimes, Empty))
+    let occursBetween (minTimes: int) (maxTimes: int) = RegexBuilder(OccursBetween(minTimes, maxTimes, Empty))
 
     ///(ABC) - Capturing group - Groups multiple tokens together and creates a capture group for extracting a substring or using a backreference.
-    let between open_ close =
-        RegexBuilder(Between(open_, close, Empty))
+    let between open_ close = RegexBuilder(Between(open_, close, Empty))
 
     ///(ABC) - Capturing group - Groups multiple tokens together and creates a capture group for extracting a substring or using a backreference.
     let capture = RegexBuilder(Capture Empty)
