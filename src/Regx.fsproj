@@ -2,18 +2,14 @@
   <PropertyGroup>
     <!-- General -->
     <AssemblyName>Regx</AssemblyName>
-    <Version>0.3.4</Version>
+    <Version>0.3.5</Version>
     <Description>Regex for humans</Description>
     <Copyright>Copyright 2023</Copyright>
     <Company>kaashyapan.com</Company>
     <Authors>Kaashyapan</Authors>
 
     <!-- Build settings -->
-    <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
-    <DebugType>portable</DebugType>
-    <OutputType>Library</OutputType>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TargetFramework>netstandard2.0</TargetFramework>
 
     <!-- NuGet Pack settings -->
     <PackageId>Regx</PackageId>
