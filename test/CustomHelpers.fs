@@ -122,5 +122,12 @@ let tests =
 
             Expect.equal result input $"'{input}' should match generated pattern {pattern}"
         }
+        test "Strong password" {
+            let pattern = regex { passwordStrong } |> Regx.make
+            let input = [ @"ElonMusk2021#"; @"ElonMush" ; @"Musk20@" ]
+            let expected = [ true ; false ; false]
+            let result = input |> List.map (fun i -> Regex.IsMatch(i, pattern))
+            Expect.equal expected result $"'{input}' should match generated pattern {pattern}"
+        }
     ]
     |> testList "Custom word helper"

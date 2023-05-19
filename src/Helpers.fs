@@ -234,3 +234,43 @@ module Helpers =
             escapedString "-"
             endsWith { occurs 12 { hex } }
         }
+
+    ///    (?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})
+    let passwordStrong =
+        let nonSpecialChar = seq { '0'..'9'} |> Seq.append (seq { 'a'..'z'}) |> Seq.append (seq { 'A'..'Z'})
+
+        group {
+            positiveLookAhead {
+              oneOrMore {
+                any
+              }
+              inRange 'a' 'z'
+            }
+            positiveLookAhead {
+              oneOrMore {
+                any
+              }
+              inRange 'A' 'Z'
+            }
+            positiveLookAhead {
+              oneOrMore {
+                any
+              }
+              digit 
+            }
+            positiveLookAhead {
+              oneOrMore {
+                any
+              }
+              charNotIn nonSpecialChar 
+            }
+            positiveLookAhead {
+              occursMoreThan 8 {
+                any
+              }
+            }
+         }
+        
+    //let passwordMedium =
+    //    ((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))
+
