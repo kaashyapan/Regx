@@ -34,4 +34,7 @@
       <Compile Include="Regx.fs" />
       <Compile Include="Helpers.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable/" />
+  </ItemGroup>
 </Project>
