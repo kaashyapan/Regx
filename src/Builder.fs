@@ -2,7 +2,7 @@ namespace Regx
 
 [<AutoOpen>]
 module Builder =
-    type RegexElement =
+    type RegxElement =
         //Character classes
         | WordChar
         | NotWordChar
@@ -19,40 +19,40 @@ module Builder =
         | Unicode of Category
         | NonUnicode of Category
         //Anchors
-        | BeginsWith of RegexElement
-        | EndsWith of RegexElement
-        | BeginsWithString of RegexElement
-        | EndsWithString of RegexElement
+        | BeginsWith of RegxElement
+        | EndsWith of RegxElement
+        | BeginsWithString of RegxElement
+        | EndsWithString of RegxElement
         | WordBoundary
         | NotWordBoundary
         //Quantifiers
-        | Occurs of int * RegexElement
-        | OccursMoreThan of int * RegexElement
-        | OccursBetween of int * int * RegexElement
-        | OneOrMore of RegexElement
-        | ZeroOrMore of RegexElement
-        | Optional of RegexElement
-        | Lazy of RegexElement
-        | Greedy of RegexElement
-        | OneOf of RegexElement
+        | Occurs of int * RegxElement
+        | OccursMoreThan of int * RegxElement
+        | OccursBetween of int * int * RegxElement
+        | OneOrMore of RegxElement
+        | ZeroOrMore of RegxElement
+        | Optional of RegxElement
+        | Lazy of RegxElement
+        | Greedy of RegxElement
+        | OneOf of RegxElement
         //Capture group
-        | Capture of RegexElement
-        | CaptureAs of string * RegexElement
-        | NoCapture of RegexElement
-        | Between of string * string * RegexElement
+        | Capture of RegxElement
+        | CaptureAs of string * RegxElement
+        | NoCapture of RegxElement
+        | Between of string * string * RegxElement
         | NumRef of int
         | NameRef of string
         //Look around
-        | PositiveLookAhead of RegexElement
-        | NegativeLookAhead of RegexElement
-        | PositiveLookBehind of RegexElement
-        | NegativeLookBehind of RegexElement
+        | PositiveLookAhead of RegxElement
+        | NegativeLookAhead of RegxElement
+        | PositiveLookBehind of RegxElement
+        | NegativeLookBehind of RegxElement
         //String literals
         | VerbatimString of string
         | EscapedString of string
         //Conditionals
-        | If of GroupIdentifier * RegexElement
-        | Else of RegexElement
+        | If of GroupIdentifier * RegxElement
+        | Else of RegxElement
         //Convenience helpers
         | Tab
         | LineFeed
@@ -62,10 +62,10 @@ module Builder =
         | NullCharacter
         //Internal
         | Empty
-        | ElementList of seq<RegexElement>
-        | RegEx of RegexElement
+        | ElementList of seq<RegxElement>
+        | RegEx of RegxElement
 
-    and RegexBuilder(el: RegexElement) =
+    and RegexBuilder(el: RegxElement) =
         member _.Yield(n: RegexBuilder) = n
 
         member _.Combine(x1: RegexBuilder, x2: RegexBuilder) =
